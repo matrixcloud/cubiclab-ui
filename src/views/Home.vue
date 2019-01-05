@@ -18,6 +18,7 @@
 
 <script>
   import { verifyUrl, clampText } from '@/utils/functions'
+  import { get, post } from '@/utils/request'
 
   export default {
     name: 'home',
@@ -94,36 +95,16 @@
     },
     methods: {
       fetchTableData() {
-        fetch('http://localhost:3000/audios')
+        get('/audios')
           .then(resp => {
-            return resp.json()
-          })
-          .then(json => {
-            if (json.errorCode === 0) {
-              this.tableData = json.data
-            }
-          })
-          .catch(e => {
-            console.log(e)
+            this.tableData = resp.data
           })
       },
       createAudio(payload) {
-        fetch('http://localhost:3000/audios', {
-          method: 'POST',
-          body: JSON.stringify(payload),
-          headers: new Headers({
-            'Content-Type': 'application/json'
-          })
-        })
-        .then(res => res.json())
+        post('/audios', payload)
         .then(res => {
-          if (res.errorCode === 0) {
-            this.$Message.success('Created')
-            this.fetchTableData()
-          }
-        })
-        .catch(e => {
-          console.log(e)
+          this.$Message.success('Created')
+          this.fetchTableData()
         })
       },
       handleAdd(e) {
