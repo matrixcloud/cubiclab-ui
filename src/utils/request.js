@@ -10,10 +10,15 @@ export function get(endpoint) {
     }
   })
     .then(resp => {
-      return resp.json()
+      if (resp.status === 401) {
+        redirect2Login()
+        return null
+      } else {
+        return resp.json()
+      }
     })
     .then(res => {
-      if (res.error_code === 0) {
+      if (res && res.error_code === 0) {
         return res
       }
     })
@@ -33,13 +38,24 @@ export function post(endpoint, payload) {
       'X-Auth-Token': token
     }
   })
-    .then(res => res.json())
     .then(res => {
-      if (res.error_code === 0) {
+      if (res.status === 401) {
+        redirect2Login()
+        return null
+      } else {
+        return res.json()
+      }
+    })
+    .then(res => {
+      if (res && res.error_code === 0) {
         return res
       }
     })
     .catch(e => {
       console.log(e)
     })
+}
+
+function redirect2Login() {
+  window.location.href = '/#/login'
 }
