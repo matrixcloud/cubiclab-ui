@@ -4,6 +4,7 @@ import Home from './views/Home'
 import Login from './views/Login'
 import Apartment from './views/Apartment'
 import EmailSetting from './views/EmailSetting'
+import StorageSetting from './views/StorageSetting'
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ const router = new Router({
       path: '/email-setting',
       name: 'email-setting',
       component: EmailSetting
+    },
+    {
+      path: '/storage-setting',
+      name: 'storage-setting',
+      component: StorageSetting
     }
   ]
 })

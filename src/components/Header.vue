@@ -10,8 +10,11 @@
         调度管理
       </template>
       <MenuGroup title="爬虫">
-        <MenuItem name="3-1" to="apartment">张江人才公寓</MenuItem>
-        <MenuItem name="3-2">新闻</MenuItem>
+        <MenuItem name="apartment" to="apartment">张江人才公寓</MenuItem>
+        <MenuItem name="news">新闻</MenuItem>
+      </MenuGroup>
+      <MenuGroup title="签到">
+        <MenuItem name="jd" to="jd">京东豆</MenuItem>
       </MenuGroup>
     </Submenu>
     <Submenu name="setting">
@@ -20,8 +23,9 @@
         综合设置
       </template>
       <MenuGroup title="通用">
-        <MenuItem name="3-1" to="email-setting">发件邮箱</MenuItem>
-        <MenuItem name="3-2">授权管理</MenuItem>
+        <MenuItem name="email-setting" to="email-setting">邮箱设置</MenuItem>
+        <MenuItem name="storage-setting" to="storage-setting">存储设置</MenuItem>
+        <MenuItem name="token-setting" to="token-setting">Token设置</MenuItem>
       </MenuGroup>
     </Submenu>
   </Menu>

@@ -1,26 +1,29 @@
 <template>
   <div class="email-setting">
-    <Form ref="form" :model="form" :rules="rules" :label-width="80">
-      <FormItem prop="email" label="Sender">
-        <Input type="text" v-model="form.email" placeholder="Sender">
-          <Icon type="ios-person-outline" slot="prepend"></Icon>
-        </Input>
-      </FormItem>
-      <FormItem prop="password">
-        <Input type="password" v-model="form.password" placeholder="Password">
-          <Icon type="ios-lock-outline" slot="prepend"></Icon>
-        </Input>
-      </FormItem>
-      <FormItem label="Text">
-        <Input v-model="form.content" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
-      </FormItem>
-      <FormItem label="ToEmail">
-        <Input type="text" v-model="form.to" />
-      </FormItem>
-      <FormItem>
-        <Button type="primary" @click="handleSubmit('form')">更新&测试</Button>
-      </FormItem>
-    </Form>
+    <Card>
+      <p slot="title">邮件设置</p>
+      <Form ref="form" :model="form" :rules="rules" :label-width="80">
+        <FormItem prop="email" label="Sender">
+          <Input type="text" v-model="form.email" placeholder="Sender">
+            <Icon type="ios-person-outline" slot="prepend"></Icon>
+          </Input>
+        </FormItem>
+        <FormItem prop="password" label="Password">
+          <Input type="password" v-model="form.password" placeholder="Password">
+            <Icon type="ios-lock-outline" slot="prepend"></Icon>
+          </Input>
+        </FormItem>
+        <FormItem label="Text">
+          <Input v-model="form.content" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
+        </FormItem>
+        <FormItem label="ToEmail">
+          <Input type="text" v-model="form.to" />
+        </FormItem>
+        <FormItem>
+          <Button type="primary" @click="handleSubmit('form')">更新&测试</Button>
+        </FormItem>
+      </Form>
+    </Card>
   </div>
 </template>
 
@@ -47,7 +50,9 @@
       }
     },
     methods: {
+      handleSubmit() {
 
+      }
     }
   }
 </script>
