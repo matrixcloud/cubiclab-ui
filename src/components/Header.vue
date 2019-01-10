@@ -1,32 +1,29 @@
 <template>
   <Menu mode="horizontal" theme="light" active-name="1">
-    <MenuItem name="1">
+    <MenuItem name="1" to="/">
       <Icon type="ios-paper" />
-      音频管理
+      内容管理
     </MenuItem>
-    <MenuItem name="2">
-      <Icon type="ios-people" />
-      用户管理
-    </MenuItem>
-    <Submenu name="3">
+    <Submenu name="schedule">
       <template slot="title">
         <Icon type="ios-stats" />
-        统计分析
+        调度管理
       </template>
-      <MenuGroup title="使用">
-        <MenuItem name="3-1">新增和启动</MenuItem>
-        <MenuItem name="3-2">活跃分析</MenuItem>
-        <MenuItem name="3-3">时段分析</MenuItem>
-      </MenuGroup>
-      <MenuGroup title="留存">
-        <MenuItem name="3-4">用户留存</MenuItem>
-        <MenuItem name="3-5">流失用户</MenuItem>
+      <MenuGroup title="爬虫">
+        <MenuItem name="3-1" to="apartment">张江人才公寓</MenuItem>
+        <MenuItem name="3-2">新闻</MenuItem>
       </MenuGroup>
     </Submenu>
-    <MenuItem name="4">
-      <Icon type="ios-construct" />
-      综合设置
-    </MenuItem>
+    <Submenu name="setting">
+      <template slot="title">
+        <Icon type="ios-stats" />
+        综合设置
+      </template>
+      <MenuGroup title="通用">
+        <MenuItem name="3-1" to="email-setting">发件邮箱</MenuItem>
+        <MenuItem name="3-2">授权管理</MenuItem>
+      </MenuGroup>
+    </Submenu>
   </Menu>
 </template>
 
