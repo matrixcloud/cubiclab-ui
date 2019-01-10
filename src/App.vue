@@ -4,15 +4,18 @@
     <div id="content">
       <router-view/>
     </div>
+    <CFooter></CFooter>
   </div>
 </template>
 <script>
   import Header from '@/components/Header'
+  import CFooter from '@/components/CFooter'
   const hiddenPaths = ["/login"]
 
   export default {
     components: {
-      Header
+      Header,
+      CFooter
     },
     data() {
       return {
