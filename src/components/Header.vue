@@ -1,15 +1,28 @@
 <template>
   <Menu mode="horizontal" theme="light" active-name="1">
-    <MenuItem name="1" to="/">
-      <Icon type="ios-paper" />
-      内容管理
-    </MenuItem>
+    <Submenu name="content-management">
+      <template slot="title">
+        <Icon type="ios-stats" />
+        内容管理
+      </template>
+      <MenuGroup title="媒体">
+        <MenuItem name="audio" to="/">
+          <Icon type="ios-paper" />
+          音频管理
+        </MenuItem>
+        <MenuItem name="news" to="news">
+          <Icon type="ios-paper" />
+          资讯管理
+        </MenuItem>
+      </MenuGroup>
+    </Submenu>
     <Submenu name="schedule">
       <template slot="title">
         <Icon type="ios-stats" />
         调度管理
       </template>
       <MenuGroup title="爬虫">
+        <MenuItem name="overview">爬虫概览</MenuItem>
         <MenuItem name="apartment" to="apartment">张江人才公寓</MenuItem>
         <MenuItem name="news">新闻</MenuItem>
       </MenuGroup>
@@ -26,6 +39,10 @@
         <MenuItem name="email-setting" to="email-setting">邮箱设置</MenuItem>
         <MenuItem name="storage-setting" to="storage-setting">存储设置</MenuItem>
         <MenuItem name="token-setting" to="token-setting">Token设置</MenuItem>
+      </MenuGroup>
+      <MenuGroup title="API">
+        <MenuItem name="api-key" to="api-key">Api Key</MenuItem>
+        <MenuItem name="api-call" to="api-call">Api 调用频次</MenuItem>
       </MenuGroup>
     </Submenu>
   </Menu>
