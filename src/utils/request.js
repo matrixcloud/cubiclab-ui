@@ -42,6 +42,8 @@ export function post(endpoint, payload) {
       if (res.status === 401) {
         redirect2Login()
         return null
+      } else if (res.status === 404) {
+        this.$Message.warning(`Endpoint [${endpoint}] Can't be found`)
       } else {
         return res.json()
       }
