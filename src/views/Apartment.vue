@@ -8,16 +8,18 @@
     </div>
     <Modal
       v-model="showAddDialog"
-      ref="addForm"
       title="新增账号"
-      @on-ok="handleAddSubmit('addForm')">
+      @on-ok="handleAddSubmit">
       <div>
-        <Form ref="formValidate" :model="addForm" :rules="addRuleValidate" :label-width="80">
+        <Form ref="addForm" :model="addForm" :rules="addRuleValidate" :label-width="80">
           <FormItem label="Name" prop="username">
             <Input v-model="addForm.username" placeholder="Enter your name"></Input>
           </FormItem>
           <FormItem label="E-mail" prop="email">
             <Input v-model="addForm.email" placeholder="Enter your e-mail"></Input>
+          </FormItem>
+          <FormItem label="Password" prop="password">
+            <Input type="password" v-model="addForm.password"></Input>
           </FormItem>
         </Form>
       </div>
@@ -26,6 +28,8 @@
 </template>
 
 <script>
+  import { get, post, del } from '@/utils/request'
+
   export default {
     name: "Apartment",
     data() {
@@ -35,6 +39,7 @@
         addForm: {
           username: '',
           email: '',
+          password: '',
         },
         addRuleValidate: {
           username: [
@@ -44,6 +49,9 @@
             {required: true, message: 'Mailbox cannot be empty', trigger: 'blur'},
             {type: 'email', message: 'Incorrect email format', trigger: 'blur'}
           ],
+          password: [
+            {required: true, trigger: 'blur'}
+          ]
         },
         columns: [
           {
@@ -62,29 +70,15 @@
               return h('div', [
                 h('Button', {
                   props: {
-                    type: 'primary',
-                    size: 'small'
-                  },
-                  style: {
-                    marginRight: '5px'
-                  },
-                  on: {
-                    click: () => {
-                      this.handleCopyCaption(params.index)
-                    }
-                  }
-                }, 'Copy'),
-                h('Button', {
-                  props: {
                     type: 'error',
                     size: 'small'
                   },
                   on: {
                     click: () => {
-                      this.handleDownload(params.index)
+                      this.handleDelete(params.index)
                     }
                   }
-                }, 'Download')
+                }, 'Delete')
               ]);
             }
           }
@@ -92,19 +86,44 @@
         tableData: [],
       }
     },
+    mounted() {
+      this.fetchUsers()
+    },
     methods: {
       handleAdd() {
         this.showAddDialog = true
       },
-      handleAddSubmit(name) {
-        console.log('handleSubmit')
-        this.$refs[name].validate((valid) => {
+      handleDelete(index) {
+        const _id = this.tableData[index]._id
+        if (_id) {
+          this.deleteUsers(_id)
+        }
+      },
+      handleAddSubmit() {
+        this.$refs['addForm'].validate((valid => {
           if (valid) {
-            this.$Message.success('Success!');
-          } else {
-            this.$Message.error('Fail!');
+            this.createUsers()
           }
-        })
+        }))
+      },
+      fetchUsers() {
+        get('/zj-users')
+          .then(r => {
+            this.tableData = r.data
+          })
+      },
+      createUsers() {
+        post('/zj-users', this.addForm)
+          .then(r => {
+            this.$Message.success('Created')
+            this.fetchUsers()
+          })
+      },
+      deleteUsers(_id) {
+        del('/zj-users/' + _id)
+          .then(r => {
+            this.fetchUsers()
+          })
       }
     }
   }

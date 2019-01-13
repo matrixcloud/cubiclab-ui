@@ -9,12 +9,14 @@ export function get(endpoint) {
       'X-Auth-Token': token
     }
   })
-    .then(resp => {
-      if (resp.status === 401) {
+    .then(res => {
+      if (res.status === 401) {
         redirect2Login()
         return null
+      } else if (res.status === 404) {
+        this.$Message.warning(`Endpoint [${endpoint}] Can't be found`)
       } else {
-        return resp.json()
+        return res.json()
       }
     })
     .then(res => {
@@ -33,6 +35,36 @@ export function post(endpoint, payload) {
   return fetch(BASE_API + endpoint, {
     method: 'POST',
     body: JSON.stringify(payload),
+    headers:{
+      'Content-Type': 'application/json',
+      'X-Auth-Token': token
+    }
+  })
+    .then(res => {
+      if (res.status === 401) {
+        redirect2Login()
+        return null
+      } else if (res.status === 404) {
+        this.$Message.warning(`Endpoint [${endpoint}] Can't be found`)
+      } else {
+        return res.json()
+      }
+    })
+    .then(res => {
+      if (res && res.error_code === 0) {
+        return res
+      }
+    })
+    .catch(e => {
+      console.log(e)
+    })
+}
+
+export function del(endpoint) {
+  const token = localStorage.getItem('X-Auth-Token')
+
+  return fetch(BASE_API + endpoint, {
+    method: 'DELETE',
     headers:{
       'Content-Type': 'application/json',
       'X-Auth-Token': token
