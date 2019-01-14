@@ -1,8 +1,11 @@
-const BASE_API = 'http://localhost:3000'
+const BASE_API = process.env.VUE_APP_BASE_API
 
 export function get(endpoint) {
   const token = localStorage.getItem('X-Auth-Token')
-  console.log('token: ', token)
+  if (!token) {
+    redirect2Login()
+  }
+
   return fetch(BASE_API + endpoint, {
     method: 'GET',
     headers: {
@@ -31,6 +34,9 @@ export function get(endpoint) {
 
 export function post(endpoint, payload) {
   const token = localStorage.getItem('X-Auth-Token')
+  if (!token) {
+    redirect2Login()
+  }
 
   return fetch(BASE_API + endpoint, {
     method: 'POST',
@@ -62,6 +68,9 @@ export function post(endpoint, payload) {
 
 export function del(endpoint) {
   const token = localStorage.getItem('X-Auth-Token')
+  if (!token) {
+    redirect2Login()
+  }
 
   return fetch(BASE_API + endpoint, {
     method: 'DELETE',
