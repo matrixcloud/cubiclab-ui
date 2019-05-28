@@ -5,6 +5,7 @@ import Login from './views/Login'
 import Apartment from './views/Apartment'
 import EmailSetting from './views/EmailSetting'
 import StorageSetting from './views/StorageSetting'
+import ProcessManagement from './views/ProcessManagement'
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/process-management',
+      name: 'process-management',
+      component: ProcessManagement
     },
     {
       path: '/login',

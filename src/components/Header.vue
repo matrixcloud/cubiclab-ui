@@ -1,5 +1,19 @@
 <template>
   <Menu mode="horizontal" theme="light" active-name="1">
+    <Submenu name="inf">
+      <template slot="title">
+        <Icon type="ios-stats" />
+        基础设施
+      </template>
+      <MenuGroup title="设施">
+        <MenuItem name="process-management" to="/process-management">
+          进程管理
+        </MenuItem>
+        <MenuItem name="ip-pool" to="/ip-pool">
+          IP 代理池
+        </MenuItem>
+      </MenuGroup>
+    </Submenu>
     <Submenu name="content-management">
       <template slot="title">
         <Icon type="ios-stats" />
